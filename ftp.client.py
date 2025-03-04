@@ -1,28 +1,32 @@
-
-from ftplib import FTP
+import socket
 
 # Tarvittava informaatio testausta varten. 
 # Salasana ja käyttäjänimi vaihtuvat ajoittain
 HOSTNAME = "ftp.dlptest.com"
 USERNAME = "dlpuser"
 PASSWORD = "rNrKYTX9g7z3RgJRmxWuGHbeu"
+portti1 = 20
+portti2 = 21
 
-with FTP(HOSTNAME) as ftp:
+soketti = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    ftp.login(user=USERNAME, passwd=PASSWORD)
-    print(ftp.getwelcome())
+ip = socket.gethostbyname(HOSTNAME)
+print(ip)
 
-    ftp.encoding = "utf-8"
+soketti.connect((ip, portti2))
+
+kirjautuminen = "USER " + USERNAME
+salasana = "PASS " + PASSWORD
+
+
+print(soketti.recv(1024))
+soketti.send((kirjautuminen + "\r\n").encode("utf-8"))
+print(soketti.recv(1024).decode())
+
+
+soketti.send((salasana + "\r\n").encode("utf-8"))
+print(soketti.recv(1024).decode())
+
+
     
-    print(ftp.sendcmd("EPSV"))
-
-    ftp.retrlines('LIST')
-        
-    lataatiedosto = input("lataa tiedosto: ")
-
-    if len(lataatiedosto) > 1:
-        with open('testi.txt', 'wb') as file:
-            ftp.retrbinary(f"RETR ", {lataatiedosto}, file.write)
-    else:
-        print("Suljetaan yhteys")
-        ftp.quit()
+    
