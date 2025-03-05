@@ -48,18 +48,6 @@ soketti.send(("LIST\r\n").encode("utf-8"))
 print(soketti.recv(1024).decode())
 print(soketti2.recv(1024).decode())
 
-#if vastaus == "a":
-    #hostinnimi = socket.gethostname()
-    #hostip = str(socket.gethostbyname(hostinnimi))
-    #hostip = hostip.replace(".", ",")
-    #osoite = hostip + ",192,21\r\n"
-    #soketti2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #soketti2.connect(("192.168.0.102", 49173))
-    ##soketti.send((osoite).encode("utf-8"))
-    #print(soketti.recv(1024))
 
-
-#soketti.send(("LIST\r\n").encode("utf-8"))
-#print(soketti.recv(1024).decode())
     
     
