@@ -28,5 +28,38 @@ soketti.send((salasana + "\r\n").encode("utf-8"))
 print(soketti.recv(1024).decode())
 
 
+
+
+
+soketti.send(("PASV\r\n").encode("utf-8"))
+data = soketti.recv(1024).decode()
+data = data[26:].strip("(")
+data = data[:len(data)-4]
+data = data.split(",")
+print(data)
+
+porttipasv = int(data[-2]) * 256 + int(data[-1])
+print(porttipasv)
+
+soketti2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+soketti2.connect((ip, porttipasv))
+
+soketti.send(("LIST\r\n").encode("utf-8"))
+print(soketti.recv(1024).decode())
+print(soketti2.recv(1024).decode())
+
+#if vastaus == "a":
+    #hostinnimi = socket.gethostname()
+    #hostip = str(socket.gethostbyname(hostinnimi))
+    #hostip = hostip.replace(".", ",")
+    #osoite = hostip + ",192,21\r\n"
+    #soketti2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #soketti2.connect(("192.168.0.102", 49173))
+    ##soketti.send((osoite).encode("utf-8"))
+    #print(soketti.recv(1024))
+
+
+#soketti.send(("LIST\r\n").encode("utf-8"))
+#print(soketti.recv(1024).decode())
     
     
