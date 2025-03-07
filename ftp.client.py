@@ -50,9 +50,9 @@ print(soketti2.recv(1024))
 print(soketti.recv(1024))
 soketti2.close()
 
-lahetetaanko = "k"#input("Haluatko lähettää tiedoston (k, e): ")
+lahetetaanko = input("Haluatko lähettää tiedoston (k, e): ")
 
-if lahetetaanko == "e":
+if lahetetaanko == "k":
     tiedostonimi = input("Syötä tiedoston nimi: ")
     soketti.send(("TYPE A\r\n").encode("utf-8"))
     print(soketti.recv(1024))
@@ -147,7 +147,7 @@ if binaarinavaiascii == "bi":
         print(soketti.recv(1024))
 
 
-
+print("Kiitos ohjelman käytöstä")
 
     
     
