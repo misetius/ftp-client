@@ -110,6 +110,7 @@ if ladataanko == "k":
         data = soketti2.recv(1024).decode()
 
         tiedosto2.write(data)
+        tiedosto2.close()
 
         soketti2.close()
         print(soketti.recv(1024))
@@ -140,6 +141,7 @@ if binaarinavaiascii == "bi":
         data = soketti2.recv(1024).decode()
 
         tiedosto2.write(data)
+        tiedosto2.close()
 
         soketti2.close()
         print(soketti.recv(1024))
